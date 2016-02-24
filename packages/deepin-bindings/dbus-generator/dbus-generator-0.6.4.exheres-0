@@ -1,0 +1,33 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+GOLIB_VER=0.4.6
+MY_PN=go-${PN}
+
+require deepin
+SUMMARY="static dbus binding tool for multipble languages"
+DOWNLOADS+=" https://github.com/linuxdeepin/go-lib/archive/${GOLIB_VER}.tar.gz"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-lang/go
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=( PREFIX=/usr/$(exhost --target) )
+
+pkg_setup() {
+    export GOPATH=${WORKBASE}
+}
+
+src_prepare() {
+    local golibdir=src/pkg.deepin.io/lib
+    edo mkdir -pv "${WORKBASE}"/${golibdir}
+    edo cp -a "${WORKBASE}"/go-lib-${GOLIB_VER}/dbus "${WORKBASE}"/${golibdir}
+
+    edo sed -e 's/qmake/&-qt5/g' -i template_qml.go
+}
+

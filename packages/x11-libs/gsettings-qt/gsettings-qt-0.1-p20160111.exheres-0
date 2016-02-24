@@ -1,0 +1,28 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PV=${PV/-p/+16.04.}
+require launchpad qmake [ slot=5 ]
+
+SUMMARY="Qml bindings for GSettings"
+DOWNLOADS="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${MY_PV}.orig.tar.gz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2
+        x11-libs/qtbase:5
+        x11-libs/qtdeclarative:5
+"
+
+src_install() {
+    default
+    edo rm -rf "${IMAGE}"/usr/share
+}
+

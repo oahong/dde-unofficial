@@ -1,0 +1,46 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin qmake [ slot=5 ]
+SUMMARY="DDE Control Center"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        x11-libs/qttools:5
+    build+run:
+        x11-libs/libX11
+        x11-libs/libXext
+        x11-libs/libdui
+        x11-libs/qtbase:5
+        x11-libs/gtk+:2
+        x11-libs/qtsvg:5 [[ note = [ dde-dock-bluetooth-plugin ] ]]
+        x11-libs/qtx11extras:5 [[ note = [ display module ] ]]
+        x11-libs/qtmultimedia:5 [[ note = [ account module ] ]]
+    run:
+        dde/dde-account-faces
+        dde/dde-daemon
+        x11-themes/deepin-icon-theme
+        x11-themes/deepin-gtk-theme
+        dde/deepin-artwork-themes
+        dde-bindings/dde-api
+"
+
+EQMAKE_PARAMS=(
+    PREFIX=/usr
+    WITH_MODULE_GRUB=NO
+    WITH_MODULE_REMOTE_ASSIST=NO
+    WITH_MODULE_SYSINFO_UPDATE=NO
+)
+
+src_prepare() {
+    edo find . -type f -name "*.pro" -exec sed \
+        -e "s@\$\${PREFIX}/bin@\$\${PREFIX}/$(exhost --target)/bin@g" \
+        -e "s@\$\${PREFIX}/lib@\$\${PREFIX}/$(exhost --target)/lib@g" -iorg {} \;
+    default
+}
+

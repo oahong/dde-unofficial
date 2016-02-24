@@ -1,0 +1,22 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN=${PN//deepin-}
+require deepin gsettings
+SUMMARY="Gsettings overrides for Deepin Desktop Environment"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+src_prepare() {
+    edo cat *.override | edo tee -a 99-${PN}.gschema.override
+}
+
+src_install() {
+    insinto /usr/share/glib-2.0/schemas
+    doins 99-${PN}.gschema.override
+}
+

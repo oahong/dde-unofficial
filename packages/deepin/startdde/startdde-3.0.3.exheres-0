@@ -16,9 +16,10 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dde-bindings/dbus-factory
+        deepin-bindings/dbus-factory
         virtual/pkg-config
     build+run:
+        deepin-bindings/dde-api
         dev-libs/glib:2
         media-libs/libcanberra
         x11-libs/gdk-pixbuf:2.0

@@ -24,7 +24,7 @@ DEPENDENCIES="
         x11-utils/xcb-util-image [[ note = [ dde-dock-systray-plugin ] ]]
         x11-utils/xcb-util-wm
     run:
-        dde/deepin-menu
+        deepin/deepin-menu
 "
 
 EQMAKE_SOURCES=( "${PN}"-bundle.pro )

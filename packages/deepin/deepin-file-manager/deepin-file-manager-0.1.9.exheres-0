@@ -21,7 +21,8 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         app-text/poppler[glib]
-        dde/deepin-metacity
+        deepin-bindings/dde-api
+        deepin/deepin-metacity
         dev-libs/glib:2
         gnome-desktop/librsvg:2
         media-libs/libcanberra

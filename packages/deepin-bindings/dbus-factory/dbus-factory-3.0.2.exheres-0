@@ -10,7 +10,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dde-bindings/dbus-generator
+        deepin-bindings/dbus-generator
         dev-lang/go
     build+run:
         x11-libs/qtbase:5

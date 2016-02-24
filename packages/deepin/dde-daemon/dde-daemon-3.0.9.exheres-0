@@ -18,7 +18,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        dde-bindings/dbus-factory[>=3.0.2]
+        deepin-bindings/dbus-factory[>=3.0.2]
         dev-lang/go
         sys-devel/gettext
         virtual/pkg-config
@@ -41,9 +41,9 @@ DEPENDENCIES="
         providers:systemd? ( sys-apps/systemd )
     run:
         app-text/iso-codes
-        dde/deepin-desktop-schemas[>=3.0.3]
-        dde/deepin-metacity
-        dde/deepin-notifications
+        deepin/deepin-desktop-schemas[>=3.0.3]
+        deepin/deepin-metacity
+        deepin/deepin-notifications
         gnome-desktop/gvfs
         gnome-desktop/polkit-gnome
         net-apps/NetworkManager
@@ -52,7 +52,7 @@ DEPENDENCIES="
         sys-power/acpid
         x11-libs/bamf
         (
-            dde/dde-account-faces
+            deepin/dde-account-faces
             sys-apps/accountsservice
         ) [[ *note = [ account service ] ]]
 "

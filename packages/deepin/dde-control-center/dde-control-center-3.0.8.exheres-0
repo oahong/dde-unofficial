@@ -22,12 +22,12 @@ DEPENDENCIES="
         x11-libs/qtx11extras:5 [[ note = [ display module ] ]]
         x11-libs/qtmultimedia:5 [[ note = [ account module ] ]]
     run:
-        dde/dde-account-faces
-        dde/dde-daemon
+        deepin/dde-account-faces
+        deepin/dde-daemon
         x11-themes/deepin-icon-theme
         x11-themes/deepin-gtk-theme
-        dde/deepin-artwork-themes
-        dde-bindings/dde-api
+        deepin/deepin-artwork-themes
+        deepin-bindings/dde-api
 "
 
 EQMAKE_PARAMS=(

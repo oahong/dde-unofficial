@@ -19,8 +19,8 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         app-text/poppler[glib]
-        dde-bindings/dbus-factory
-        dde/deepin-metacity
+        deepin-bindings/dbus-factory
+        deepin/deepin-metacity
         dev-libs/glib:2
         gnome-desktop/librsvg:2
         media-libs/libcanberra
@@ -32,7 +32,7 @@ DEPENDENCIES="
         x11-libs/libXfixes
         x11-libs/libXi
     run:
-        dde/deepin-desktop-base
+        deepin/deepin-desktop-base
 "
 
 DEFAULT_SRC_COMPILE_PARAMS=( -j1 )

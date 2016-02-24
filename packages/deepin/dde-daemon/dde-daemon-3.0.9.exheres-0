@@ -1,0 +1,87 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+GOLIB_VER=0.4.7
+require deepin
+
+SUMMARY="daemon to handle deepin session settings"
+DOWNLOADS+="
+    https://oahong.me/~oahong/distfiles/dde-api-golib-20160204.tar.xz
+    https://github.com/linuxdeepin/go-lib/archive/${GOLIB_VER}.tar.gz
+"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build:
+        dde-bindings/dbus-factory[>=3.0.2]
+        dev-lang/go
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2
+        media-libs/fontconfig
+        media-libs/libcanberra
+        gnome-desktop/librsvg:2
+        media-sound/pulseaudio
+        x11-libs/gdk-pixbuf:2.0
+        x11-libs/gtk+:3
+        x11-libs/libX11
+        x11-libs/libXcursor
+        x11-libs/libXfixes
+        x11-libs/libXi
+        x11-libs/libXtst
+        x11-libs/bamf
+        x11-libs/libxkbfile
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
+    run:
+        app-text/iso-codes
+        dde/deepin-desktop-schemas[>=3.0.3]
+        dde/deepin-metacity
+        dde/deepin-notifications
+        gnome-desktop/gvfs
+        gnome-desktop/polkit-gnome
+        net-apps/NetworkManager
+        net-wireless/bluez
+        sys-apps/upower
+        sys-power/acpid
+        x11-libs/bamf
+        (
+            dde/dde-account-faces
+            sys-apps/accountsservice
+        ) [[ *note = [ account service ] ]]
+"
+
+DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
+
+pkg_setup() {
+    export GOPATH=${WORKBASE}:/usr/share/gocode
+}
+
+src_prepare() {
+    local golibdir="${WORKBASE}"/src/pkg.deepin.io/lib
+
+    edo mkdir -pv ${golibdir}
+    edo cp -a "${WORKBASE}"/go-lib-${GOLIB_VER}/* ${golibdir}
+    #    -e "s@bin@$(exhost --target)/bin@g" \
+    edo sed -e "s@pkg-config@${PKG_CONFIG}@g" \
+        -e "s@gcc@${CC}@" \
+        -e "s@lib/deepin-daemon@$(exhost --target)/&@g" \
+        -i Makefile
+    default
+}
+
+src_install() {
+    default
+    insinto /etc/xdg/autostart
+    doins "${FILES}"/polkit-gnome-authentication-agent-1.desktop
+    insinto /var/lib/lastore
+    doins "${FILES}"/{applications,categories,xcategories}.json
+    keepdir /var/cache/deepin
+}
+

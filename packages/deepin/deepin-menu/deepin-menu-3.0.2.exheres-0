@@ -1,0 +1,43 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin qmake [ slot=5 ]
+require setup-py [ import=setuptools blacklist="3" multibuild=false has_lib=true ]
+SUMMARY="deepin menu service"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/PyQt5[dbus][python_abis:*(-)?]
+        x11-libs/libX11
+        x11-libs/libxcb
+        x11-libs/qtbase:5
+        x11-libs/qtx11extras:5
+"
+
+src_prepare() {
+    edo sed -e "s@/usr/lib@/usr/$(exhost --target)/lib@" \
+        -i ${PN}.pro
+    default
+}
+
+src_configure() {
+    setup-py_src_configure
+    qmake_src_configure
+}
+
+src_install() {
+    # TODO: Drop python binding
+    setup-py_src_install
+    default
+    edo rm -rf "${IMAGE}"/usr/deepin_menu
+    
+    #insinto /etc/xdg/autostart
+    #doins ${PN}.desktop
+    insinto /usr/share/dbus-1/services
+    doins com.deepin.menu.service
+}
+

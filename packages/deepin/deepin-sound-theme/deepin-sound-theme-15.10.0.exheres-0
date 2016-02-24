@@ -1,0 +1,12 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin
+SUMMARY="Deepin sound theme"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+

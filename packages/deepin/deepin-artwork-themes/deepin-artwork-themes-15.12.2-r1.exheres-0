@@ -13,3 +13,9 @@ DEPENDENCIES="
         dev-lang/python:2.7
 "
 
+src_prepare() {
+    # use correct wallpaper from deepin-desktop-base
+    edo sed -e 's@default_background@desktop@' \
+        -i themes/deepin/theme.ini
+}
+

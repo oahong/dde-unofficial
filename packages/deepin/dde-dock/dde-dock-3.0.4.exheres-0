@@ -1,0 +1,42 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin qmake [ slot=5 ]
+SUMMARY="Dock front-end for DDE"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        x11-libs/qttools:5
+    build+run:
+        x11-libs/cairo
+        x11-libs/gtk+:2
+        x11-libs/libX11
+        x11-libs/libdui
+        x11-libs/libxcb
+        x11-libs/qtbase:5
+        x11-libs/qtsvg:5
+        x11-libs/qtx11extras:5
+        x11-utils/xcb-util-image [[ note = [ dde-dock-systray-plugin ] ]]
+        x11-utils/xcb-util-wm
+    run:
+        dde/deepin-menu
+"
+
+EQMAKE_SOURCES=( "${PN}"-bundle.pro )
+EQMAKE_PARAMS=( PREFIX=/usr/$(exhost --target) )
+
+src_prepare() {
+    default
+    edo sed -e "s@/usr/bin@/usr/$(exhost --target)/bin@" \
+        -e "s@/usr/include@/usr/$(exhost --target)/include@" \
+        -i ${PN}/${PN}.pro \
+        -e "s@/usr/lib@/usr/$(exhost --target)/lib@g" \
+        -i ${PN}-trash-plugin/${PN}-trash-plugin.pro \
+        -i ${PN}-systray-plugin/${PN}-systray-plugin.pro
+}
+

@@ -1,0 +1,33 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin
+SUMMARY="dbus library binding for QML and golang"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dde-bindings/dbus-generator
+        dev-lang/go
+    build+run:
+        x11-libs/qtbase:5
+"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    QT5_LIBDIR=/usr/$(exhost --target)/lib/qt5
+)
+
+pkg_setup() {
+    export GOPATH=/usr/share/gocode
+}
+
+src_install() {
+    default
+    dodir /usr/$(exhost --target)
+    edo mv "${IMAGE}"/usr/{,$(exhost --target)/}lib
+    emagicdocs
+}
+

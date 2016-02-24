@@ -1,0 +1,44 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+GOLIB_VER=0.4.6
+
+require deepin
+SUMMARY="Launch DDE session"
+DOWNLOADS+="
+    https://oahong.me/~oahong/distfiles/dde-api-golib-20160204.tar.xz
+    https://github.com/linuxdeepin/go-lib/archive/${GOLIB_VER}.tar.gz
+"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dde-bindings/dbus-factory
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2
+        media-libs/libcanberra
+        x11-libs/gdk-pixbuf:2.0
+        x11-libs/gtk+:3
+        x11-libs/libX11
+"
+
+pkg_setup() {
+    export GOPATH=${WORKBASE}:/usr/share/gocode
+}
+
+src_prepare() {
+    local golibdir="${WORKBASE}"/src/pkg.deepin.io/lib
+
+    edo mkdir -pv ${golibdir}
+    edo cp -a "${WORKBASE}"/go-lib-${GOLIB_VER}/* ${golibdir}
+
+    edo sed -e "s@pkg-config@${PKG_CONFIG}@" \
+        -e "s@bin@$(exhost --target)/bin@g" \
+        -i Makefile
+    default
+}
+

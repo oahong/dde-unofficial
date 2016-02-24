@@ -1,0 +1,55 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+GOLIB_VER=0.4.7
+require deepin
+SUMMARY="Golang bingdings for dde-daemon"
+DOWNLOADS+="
+    https://oahong.me/~oahong/distfiles/dde-api-golib-20160204.tar.xz
+    https://github.com/linuxdeepin/go-lib/archive/${GOLIB_VER}.tar.gz
+"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-lang/go
+        virtual/pkg-config
+    build+run:
+        app-text/poppler[glib]
+        dde-bindings/dbus-factory
+        dde/deepin-metacity
+        dev-libs/glib:2
+        gnome-desktop/librsvg:2
+        media-libs/libcanberra
+        x11-libs/cairo
+        x11-libs/gdk-pixbuf:2.0
+        x11-libs/gtk+:3
+        x11-libs/libX11
+        x11-libs/libXcursor
+        x11-libs/libXfixes
+        x11-libs/libXi
+    run:
+        dde/deepin-desktop-base
+"
+
+DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr
+    SYSTEMD_SERVICE_DIR=/usr/$(exhost --target)/lib/systemd/system
+    libdir=/$(exhost --target)/lib
+)
+
+pkg_setup() {
+    export GOPATH=${WORKBASE}:/usr/share/gocode
+}
+
+src_prepare() {
+    local golibdir=gobuild/src/pkg.deepin.io/lib
+    edo mkdir -pv ${golibdir}
+    edo cp -a "${WORKBASE}"/go-lib-${GOLIB_VER}/* ${golibdir}
+    default
+}
+

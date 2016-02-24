@@ -34,7 +34,7 @@ src_install() {
     setup-py_src_install
     default
     edo rm -rf "${IMAGE}"/usr/deepin_menu
-    
+
     #insinto /etc/xdg/autostart
     #doins ${PN}.desktop
     insinto /usr/share/dbus-1/services

@@ -1,0 +1,32 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin gtk-icon-cache
+SUMMARY="deepin icon theme"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    ( providers:
+        graphicsmagick
+        imagemagick
+    ) [[
+        *description = [ Software suites to create, edit, and compose bitmap images ]
+        number-selected = at-least-one
+    ]]
+"
+
+DEPENDENCIES="
+    build:
+        media-gfx/inkscape
+        providers:graphicsmagick? ( media-gfx/GraphicsMagick )
+        providers:imagemagick?    ( media-gfx/ImageMagick )
+"
+
+DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
+
+src_prepare() {
+    edo mkdir -pv debian
+    default
+}
+

@@ -1,0 +1,24 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin
+SUMMARY="static golang bindings for GObject"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-lang/go
+        virtual/pkg-config
+    build+run:
+        gnome-desktop/gobject-introspection:1
+"
+
+src_prepare() {
+    edo sed -e "s@pkg-config@${PKG_CONFIG}@g" \
+        -e "/PREFIX/s@bin@$(exhost --target)/&@g" \
+        -i makefile
+}
+

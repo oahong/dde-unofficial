@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require deepin qmake [ slot=5 ]
-SUMMARY="Application launcher front-end for DDE"
+SUMMARY="Application launcher front-end for Deepin"
 
 SLOT="0"
 PLATFORMS="~amd64"

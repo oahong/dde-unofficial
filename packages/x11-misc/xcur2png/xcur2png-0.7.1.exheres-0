@@ -1,0 +1,21 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+CONTENT_ID=86010
+SUMMARY="A utility to convert x cursors to PNG image"
+HOMEPAGE="http://cli-apps.org/content/show.php/${PN}?content=${CONTENT_ID}"
+DOWNLOADS="http://cli-apps.org/CONTENT/content-files/${CONTENT_ID}-${PNV}.tar.gz -> ${PNV}.tar.gz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        media-libs/libpng:=[>=1.0.6]
+        x11-libs/libXcursor
+"
+

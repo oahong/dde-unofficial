@@ -33,6 +33,7 @@ DEPENDENCIES="
         x11-libs/libXi
     run:
         deepin/deepin-desktop-base
+        x11-misc/xcur2png
 "
 
 DEFAULT_SRC_COMPILE_PARAMS=( -j1 )

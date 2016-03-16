@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require deepin qmake [ slot=5 ]
-SUMMARY="Desktop front-end for DDE"
+SUMMARY="The desktop component of Deepin Desktop Environment"
 
 SLOT="0"
 PLATFORMS="~amd64"

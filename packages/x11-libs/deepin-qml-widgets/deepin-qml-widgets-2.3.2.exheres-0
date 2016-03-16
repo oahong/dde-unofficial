@@ -1,0 +1,25 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin qmake [ slot=5 ]
+SUMMARY="Qt widget extensions for Deepin applications"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        x11-libs/gtk+:2
+        x11-libs/libXcomposite
+        x11-libs/libxcb
+        x11-libs/qtbase:5
+        x11-libs/qtdeclarative:5
+        x11-libs/qtx11extras:5
+"
+
+EQMAKE_SOURCES=( deepin_widgets.pro )
+EQMAKE_PARAMS=( PREFIX=/usr/$(exhost --target) )
+

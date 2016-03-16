@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require deepin gsettings
-SUMMARY="gsettings schemas for DDE"
+SUMMARY="The configuration files of Deepin Desktop Environment"
 
 SLOT="0"
 PLATFORMS="~amd64"

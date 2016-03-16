@@ -2,18 +2,25 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require deepin qmake [ slot=5 ]
-SUMMARY="Deepin Desktop Notifications Specification"
+SUMMARY="The desktop notifications component of Deepin Desktop Environment"
 
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build:
     build+run:
         x11-libs/qtbase:5
         x11-libs/qtquick1:5
+    run:
+        x11-libs/deepin-qml-widgets
 "
 
-EQMAKE_PARAMS=( PREFIX=/usr/$(exhost --target) )
+EQMAKE_PARAMS=( PREFIX=/usr )
+
+src_prepare() {
+    edo sed -e "/target.path/s@lib@$(exhost --target)/&@" \
+        -i src/src.pro
+    default
+}
 

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require deepin qmake [ slot=5 ]
-SUMMARY="Shutdown, Lock and other session UI for Deepin"
+SUMMARY="Shutdown, Lock and other session UI for Deepin Desktop Environment"
 
 SLOT="0"
 PLATFORMS="~amd64"

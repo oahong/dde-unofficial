@@ -1,7 +1,6 @@
 # Copyright 2016 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-MY_PV=2016.01.28
 require deepin
 
 SUMMARY="base desktop component for DDE"
@@ -14,7 +13,9 @@ DEPENDENCIES=""
 
 src_prepare() {
     default
-    edo sed -e "s@/usr/lib@/usr/$(exhost --target)/lib@" \
+
+    edo sed -e '/lsb-release/d;/etc/d' \
+        -e "s@/usr/lib@/usr/$(exhost --target)/lib@" \
         -i Makefile
 }
 

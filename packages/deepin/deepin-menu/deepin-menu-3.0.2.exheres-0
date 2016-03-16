@@ -3,7 +3,7 @@
 
 require deepin qmake [ slot=5 ]
 require setup-py [ import=setuptools blacklist="3" multibuild=false has_lib=true ]
-SUMMARY="deepin menu service"
+SUMMARY="The desktop menu component of Deepin Desktop Environment"
 
 SLOT="0"
 PLATFORMS="~amd64"

@@ -11,7 +11,7 @@ LINGUAS=(
 )
 require deepin gsettings gtk-icon-cache autotools [ supported_automake=[ 1.15 ] supported_autoconf=[ 2.5 ] ]
 
-SUMMARY="Flashback window manager for Deepin"
+SUMMARY="2D window manager for Deepin"
 
 SLOT="0"
 PLATFORMS="~amd64"

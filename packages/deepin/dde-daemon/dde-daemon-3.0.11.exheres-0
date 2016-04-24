@@ -4,7 +4,7 @@
 GOLIB_VER=0.4.7
 require deepin
 
-SUMMARY="daemon to handle deepin session settings"
+SUMMARY="The back-end service of Deepin Desktop Environment"
 DOWNLOADS+="
     https://oahong.me/~oahong/distfiles/dde-api-golib-20160204.tar.xz
     https://github.com/linuxdeepin/go-lib/archive/${GOLIB_VER}.tar.gz
@@ -57,6 +57,8 @@ DEPENDENCIES="
         ) [[ *note = [ account service ] ]]
 "
 
+# Make sure we can read our famous distro brand on control center
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/read-distro-from-os-release.patch )
 DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
 
 pkg_setup() {
@@ -73,15 +75,14 @@ src_prepare() {
         -e "s@gcc@${CC}@" \
         -e "s@lib/deepin-daemon@$(exhost --target)/&@g" \
         -i Makefile
+    edo sed -e 's/default_background/desktop/' -i accounts/user.go
     default
 }
 
 src_install() {
     default
     insinto /etc/xdg/autostart
+    # TODO: user lxqt-polkit?
     doins "${FILES}"/polkit-gnome-authentication-agent-1.desktop
-    insinto /var/lib/lastore
-    doins "${FILES}"/{applications,categories,xcategories}.json
-    keepdir /var/cache/deepin
 }
 

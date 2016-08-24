@@ -9,18 +9,20 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
+    build:
+        virtual/pkg-config
     build+run:
+        x11-libs/gtk+:2
         x11-libs/qtbase:5
-        x11-libs/qtquick1:5
-    run:
-        x11-libs/deepin-qml-widgets
+        x11-libs/qtdeclarative:5
+        x11-libs/deepin-tool-kit
 "
 
 EQMAKE_PARAMS=( PREFIX=/usr )
 
 src_prepare() {
-    edo sed -e "/target.path/s@lib@$(exhost --target)/&@" \
-        -i src/src.pro
     default
+    edo sed -e "/target.path/s@lib@$(exhost --target)/&@" \
+        -i ${PN}.pro
 }
 

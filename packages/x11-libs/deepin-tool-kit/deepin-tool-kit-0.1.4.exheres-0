@@ -1,0 +1,29 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin qmake [ slot=5 ]
+
+SUMMARY="base devlopment tool of all C++/Qt Developer work on Deepin"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        x11-libs/libX11
+        x11-libs/libXext
+        x11-libs/qtbase:5
+        x11-libs/qtmultimedia:5
+        x11-libs/qtx11extras:5
+"
+
+EQMAKE_SOURCES=( dtk.pro )
+
+EQMAKE_PARAMS=(
+    LIB_INSTALL_DIR=/usr/$(exhost --target)/lib
+    INCLUDE_INSTALL_DIR=/usr/$(exhost --target)/include
+)
+

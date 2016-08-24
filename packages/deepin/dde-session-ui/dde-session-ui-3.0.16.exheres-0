@@ -26,7 +26,7 @@ DEPENDENCIES="
         x11-libs/qtbase:5
         x11-libs/qtsvg:5
         x11-libs/qtx11extras:5
-        sys-libs/libpam [[ note = [ dde-lockservice ] ]]
+        sys-libs/pam [[ note = [ dde-lockservice ] ]]
 "
 
 EQMAKE_PARAMS=( PREFIX=/usr )

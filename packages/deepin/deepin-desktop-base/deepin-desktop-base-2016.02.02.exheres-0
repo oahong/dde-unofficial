@@ -14,7 +14,7 @@ DEPENDENCIES=""
 src_prepare() {
     default
 
-    edo sed -e '/lsb-release/d;/etc/d' \
+    edo sed -e '/lsb-release/d' \
         -e "s@/usr/lib@/usr/$(exhost --target)/lib@" \
         -i Makefile
 }

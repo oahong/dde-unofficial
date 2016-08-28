@@ -1,0 +1,50 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+GOLIB_VER=0.4.8
+require deepin
+
+SUMMARY="deepin file manager backend"
+DOWNLOADS+="
+    https://oahong.me/~oahong/distfiles/dde-api-golib-20160204.tar.xz
+    https://github.com/linuxdeepin/go-lib/archive/${GOLIB_VER}.tar.gz
+"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-lang/go
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        app-text/poppler[glib]
+        deepin-bindings/dde-api
+        deepin/deepin-metacity
+        dev-libs/glib:2
+        gnome-desktop/librsvg:2
+        media-libs/libcanberra
+        x11-libs/cairo[X]
+        x11-libs/gdk-pixbuf
+        x11-libs/gtk+:3
+        x11-libs/libX11
+        x11-libs/libXi
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    TARGET_DIR="${IMAGE}"/usr/$(exhost --target)/lib/deepin-daemon
+)
+
+pkg_setup() {
+    export GOPATH=${WORKBASE}:/usr/share/gocode
+}
+
+src_prepare() {
+    local golibdir=${WORKBASE}/src/pkg.deepin.io/lib
+    edo mkdir -pv ${golibdir}
+    edo cp -a "${WORKBASE}"/go-lib-${GOLIB_VER}/* ${golibdir}
+    default
+}
+

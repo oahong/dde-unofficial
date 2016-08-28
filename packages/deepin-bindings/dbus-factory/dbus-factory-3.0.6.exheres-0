@@ -16,8 +16,9 @@ DEPENDENCIES="
         x11-libs/qtbase:5
 "
 
-DEFAULT_SRC_COMPILE_PARAMS=(
+DEFAULT_SRC_INSTALL_PARAMS=(
     QT5_LIBDIR=/usr/$(exhost --target)/lib/qt5
+    QMLDIR=/usr/$(exhost --target)/lib/qml
 )
 
 pkg_setup() {
@@ -26,8 +27,6 @@ pkg_setup() {
 
 src_install() {
     default
-    dodir /usr/$(exhost --target)
-    edo mv "${IMAGE}"/usr/{,$(exhost --target)/}lib
-    emagicdocs
+    edo rmdir "${IMAGE}"/usr/$(exhost --target)/lib/qml
 }
 

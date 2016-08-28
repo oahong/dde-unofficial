@@ -1,7 +1,7 @@
 # Copyright 2016 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-GOLIB_VER=0.4.6
+GOLIB_VER=0.4.11
 
 require deepin
 SUMMARY="Launch DDE session"
@@ -25,6 +25,14 @@ DEPENDENCIES="
         x11-libs/gdk-pixbuf:2.0
         x11-libs/gtk+:3
         x11-libs/libX11
+    run:
+        deepin/dde-daemon
+        deepin/dde-desktop
+        deepin/dde-dock
+        deepin/dde-launcher
+        deepin/dde-session-ui
+        deepin/deepin-file-manager-backend
+        deepin/deepin-wm-switcher
 "
 
 pkg_setup() {
@@ -39,6 +47,8 @@ src_prepare() {
 
     edo sed -e "s@pkg-config@${PKG_CONFIG}@" \
         -e "s@bin@$(exhost --target)/bin@g" \
+        -e "s@/usr/lib@$/usr/$(exhost --target)/lib@g"    \
+        -e "s@/lib/systemd@$/usr/$(exhost --target)/lib/systemd@g"    \
         -i Makefile
     default
 }

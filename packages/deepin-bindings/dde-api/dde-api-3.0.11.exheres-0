@@ -1,9 +1,13 @@
 # Copyright 2016 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-GOLIB_VER=0.4.7
+GOLIB_VER=0.4.11
 require deepin
 SUMMARY="Golang bingdings for dde-daemon"
+DESCRIPTION="
+DDE API provides some dbus interfaces that is used for screen zone detecting,
+thumbnail generating, sound playing, etc.
+"
 DOWNLOADS+="
     https://oahong.me/~oahong/distfiles/dde-api-golib-20160204.tar.xz
     https://github.com/linuxdeepin/go-lib/archive/${GOLIB_VER}.tar.gz
@@ -20,6 +24,7 @@ DEPENDENCIES="
     build+run:
         app-text/poppler[glib]
         deepin-bindings/dbus-factory
+        deepin-bindings/go-gir-generator
         deepin/deepin-metacity
         dev-libs/glib:2
         gnome-desktop/librsvg:2
@@ -35,8 +40,10 @@ DEPENDENCIES="
         deepin/deepin-desktop-base
         x11-misc/xcur2png
 "
+#    recommendation:
+#        media-gfx/blur_image
 
-DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
+
 DEFAULT_SRC_INSTALL_PARAMS=(
     PREFIX=/usr
     SYSTEMD_SERVICE_DIR=/usr/$(exhost --target)/lib/systemd/system
@@ -51,6 +58,5 @@ src_prepare() {
     local golibdir=gobuild/src/pkg.deepin.io/lib
     edo mkdir -pv ${golibdir}
     edo cp -a "${WORKBASE}"/go-lib-${GOLIB_VER}/* ${golibdir}
-    default
 }
 

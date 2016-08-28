@@ -1,7 +1,7 @@
 # Copyright 2016 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-GOLIB_VER=0.4.7
+GOLIB_VER=0.4.11
 require deepin
 
 SUMMARY="The back-end service of Deepin Desktop Environment"
@@ -50,6 +50,7 @@ DEPENDENCIES="
         net-wireless/bluez
         sys-apps/upower
         sys-power/acpid
+        virtual/notification-daemon
         x11-libs/bamf
         (
             deepin/dde-account-faces
@@ -59,7 +60,6 @@ DEPENDENCIES="
 
 # Make sure we can read our famous distro brand on control center
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/read-distro-from-os-release.patch )
-DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
 
 pkg_setup() {
     export GOPATH=${WORKBASE}:/usr/share/gocode

@@ -1,0 +1,24 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require deepin qmake [ slot=5 ]
+SUMMARY="Calendar for Deepin Desktop Environment."
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        x11-libs/qtbase:5
+        x11-libs/deepin-tool-kit
+"
+
+src_prepare() {
+    default
+    edo sed -e "/target.path/s@bin@$(exhost --target)/&@" \
+        -i ${PN}.pro
+}
+

@@ -23,6 +23,9 @@ DEPENDENCIES="
         x11-libs/qtsvg:5
         x11-libs/qtx11extras
         x11-utils/xcb-util-wm
+    run:
+        deepin/deepin-file-manager-backend
+        deepin/deepin-menu
 "
 
 src_prepare() {

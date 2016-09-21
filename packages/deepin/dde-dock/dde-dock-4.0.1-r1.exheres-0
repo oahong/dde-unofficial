@@ -27,7 +27,7 @@ DEPENDENCIES="
     run:
         deepin/deepin-menu
     recommendation:
-        deepin/dde-calendar
+        deepin-apps/dde-calendar
 "
 
 EQMAKE_PARAMS=( PREFIX=/usr )

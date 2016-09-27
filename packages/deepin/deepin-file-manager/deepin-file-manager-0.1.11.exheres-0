@@ -1,7 +1,7 @@
 # Copyright 2016 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-GOLIB_VER=0.4.8
+GOLIB_VER=0.4.11
 require deepin
 
 SUMMARY="deepin file manager backend"
@@ -42,9 +42,9 @@ pkg_setup() {
 }
 
 src_prepare() {
+    default
     local golibdir=${WORKBASE}/src/pkg.deepin.io/lib
     edo mkdir -pv ${golibdir}
     edo cp -a "${WORKBASE}"/go-lib-${GOLIB_VER}/* ${golibdir}
-    default
 }
 
